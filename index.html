@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Breathing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Background Glass Layers -->
+        <div class="glass-background">
+            <div class="glass-layer layer-1"></div>
+            <div class="glass-layer layer-2"></div>
+            <div class="glass-layer layer-3"></div>
+        </div>
+
+        <!-- Main Interface -->
+        <div class="main-interface">
+            <!-- Header -->
+            <header class="glass-panel header">
+                <h1>Breathe</h1>
+                <div class="exercise-selector">
+                    <button class="exercise-btn active" data-exercise="wim-hof">Wim Hof</button>
+                    <button class="exercise-btn" data-exercise="box">Box Breathing</button>
+                    <button class="exercise-btn" data-exercise="calm">4-7-8 Calm</button>
+                </div>
+            </header>
+
+            <!-- Central Breathing Circle -->
+            <div class="breathing-container">
+                <div class="breathing-circle-wrapper">
+                    <div class="breathing-circle glass-sphere">
+                        <!-- Duration Blob -->
+                        <div class="duration-blob-container">
+                            <div class="duration-blob"></div>
+                            <div class="blob-trail"></div>
+                        </div>
+                        
+                        <!-- Liquid Core -->
+                        <div class="liquid-core">
+                            <div class="liquid-layer layer-1"></div>
+                            <div class="liquid-layer layer-2"></div>
+                            <div class="liquid-layer layer-3"></div>
+                        </div>
+                        
+                        <!-- Progress Ring -->
+                        <svg class="progress-ring" width="220" height="220">
+                            <circle
+                                class="progress-ring-circle"
+                                stroke="rgba(255, 255, 255, 0.3)"
+                                stroke-width="3"
+                                fill="transparent"
+                                r="105"
+                                cx="110"
+                                cy="110"/>
+                            <circle
+                                class="progress-ring-progress"
+                                stroke="rgba(255, 255, 255, 0.8)"
+                                stroke-width="3"
+                                fill="transparent"
+                                r="105"
+                                cx="110"
+                                cy="110"
+                                stroke-dasharray="659.73"
+                                stroke-dashoffset="659.73"/>
+                        </svg>
+                        
+                        <div class="ripple-container">
+                            <div class="ripple"></div>
+                            <div class="ripple"></div>
+                            <div class="ripple"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase Indicator -->
+                    <div class="phase-indicator glass-panel">
+                        <span class="phase-text">Get Ready</span>
+                        <span class="phase-subtext">Prepare to begin</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls glass-panel">
+                <button class="control-btn play-stop" id="playStop">
+                    <span class="play-icon">▶</span>
+                    <span class="stop-icon" style="display: none;">⏹</span>
+                </button>
+                <button class="control-btn debug-toggle" id="debugToggle" title="Toggle Debug Timer">
+                    <span class="debug-icon">⏱️</span>
+                </button>
+                
+                <!-- Progress -->
+                <div class="progress-container">
+                    <div class="round-indicator">
+                        <span class="round-text">Round</span>
+                        <span class="round-number">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Debug Timer -->
+            <div class="debug-timer glass-panel" id="debugTimer" style="display: none;">
+                <div class="timer-header">
+                    <span class="timer-title">Timer</span>
+                    <span class="timer-phase" id="timerPhase">Ready</span>
+                </div>
+                <div class="timer-display">
+                    <div class="timer-current">
+                        <span class="timer-label">Current:</span>
+                        <span class="timer-value" id="currentTime">0.0s</span>
+                    </div>
+                    <div class="timer-total">
+                        <span class="timer-label">Total:</span>
+                        <span class="timer-value" id="totalTime">0.0s</span>
+                    </div>
+                </div>
+                <div class="timer-progress">
+                    <div class="timer-progress-bar" id="timerProgressBar"></div>
+                </div>
+            </div>
+
+            <!-- Instructions Panel -->
+            <div class="instructions glass-panel">
+                <div class="exercise-info">
+                    <h3 class="exercise-title">Wim Hof Method</h3>
+                    <p class="exercise-description">
+                        Take 30 deep breaths, then hold after exhale. Repeat for 3 rounds.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Congratulations Popup -->
+        <div class="congratulations-popup" id="congratulationsPopup" style="display: none;">
+            <div class="popup-overlay"></div>
+            <div class="popup-content glass-panel">
+                <div class="popup-waves">
+                    <div class="wave wave-1"></div>
+                    <div class="wave wave-2"></div>
+                    <div class="wave wave-3"></div>
+                </div>
+                <div class="popup-text">
+                    <h2 class="popup-title">Congratulations!</h2>
+                    <p class="popup-message">
+                        You've completed your breathing exercise with dedication and focus. 
+                        Every breath you took was a step toward a calmer, more centered you.
+                    </p>
+                    <p class="popup-subtitle">
+                        You're investing in your wellbeing and that's something to celebrate! ✨
+                    </p>
+                    <button class="popup-close-btn glass-sphere" id="popupCloseBtn">
+                        Continue Your Journey
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

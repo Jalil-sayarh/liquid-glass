@@ -19,12 +19,18 @@
         <div class="main-interface">
             <!-- Header -->
             <header class="glass-panel header">
-                <h1>Breathe</h1>
+                
                 <div class="exercise-selector">
-                    <button class="exercise-btn active" data-exercise="wim-hof">Wim Hof</button>
-                    <button class="exercise-btn" data-exercise="box">Box Breathing</button>
-                    <button class="exercise-btn" data-exercise="calm">4-7-8 Calm</button>
+                    <h1>Breathe</h1>
+                    <div class="exercise-buttons">
+                        <button class="exercise-btn active" data-exercise="wim-hof">Wim Hof</button>
+                        <button class="exercise-btn" data-exercise="box">Box Breathing</button>
+                        <button class="exercise-btn" data-exercise="calm">4-7-8 Calm</button>
+                    </div>
                 </div>
+                <p class="exercise-description">
+                    Take 30 deep breaths, then hold after exhale. Repeat for 3 rounds.
+                </p>
             </header>
 
             <!-- Central Breathing Circle -->
@@ -73,16 +79,17 @@
                         </div>
                     </div>
                     
-                    <!-- Phase Indicator -->
-                    <div class="phase-indicator glass-panel">
-                        <span class="phase-text">Get Ready</span>
-                        <span class="phase-subtext">Prepare to begin</span>
-                    </div>
+
                 </div>
             </div>
 
             <!-- Controls -->
             <div class="controls glass-panel">
+                                    <!-- Phase Indicator -->
+                                    <div class="phase-indicator">
+                                        <span class="phase-text">Get Ready</span>
+                                        <span class="phase-subtext">Prepare to begin</span>
+                                    </div>
                 <button class="control-btn play-stop" id="playStop">
                     <span class="play-icon">▶</span>
                     <span class="stop-icon" style="display: none;">⏹</span>
@@ -121,15 +128,7 @@
                 </div>
             </div>
 
-            <!-- Instructions Panel -->
-            <div class="instructions glass-panel">
-                <div class="exercise-info">
-                    <h3 class="exercise-title">Wim Hof Method</h3>
-                    <p class="exercise-description">
-                        Take 30 deep breaths, then hold after exhale. Repeat for 3 rounds.
-                    </p>
-                </div>
-            </div>
+
         </div>
 
         <!-- Congratulations Popup -->

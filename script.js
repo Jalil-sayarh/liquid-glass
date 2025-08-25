@@ -59,7 +59,6 @@ class BreathingExercise {
         this.phaseSubtext = document.querySelector('.phase-subtext');
         this.roundNumber = document.querySelector('.round-number');
 
-        this.exerciseTitle = document.querySelector('.exercise-title');
         this.exerciseDescription = document.querySelector('.exercise-description');
         
         this.congratulationsPopup = document.getElementById('congratulationsPopup');
@@ -174,9 +173,6 @@ class BreathingExercise {
     updateExerciseInfo() {
         const exercise = this.exercises[this.currentExercise];
         
-        if (this.exerciseTitle) {
-            this.exerciseTitle.textContent = exercise.name;
-        }
         if (this.exerciseDescription) {
             this.exerciseDescription.textContent = exercise.description;
         }
@@ -400,10 +396,6 @@ class BreathingExercise {
         const exercise = this.exercises[this.currentExercise];
         
         // Safely update elements that exist
-        if (this.exerciseTitle) {
-            this.exerciseTitle.textContent = exercise.name;
-        }
-        
         if (this.roundNumber) {
             this.roundNumber.textContent = `${this.roundCount}/${exercise.rounds}`;
         }

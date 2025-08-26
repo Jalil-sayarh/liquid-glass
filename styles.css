@@ -123,8 +123,8 @@ body {
 .main-interface {
     position: relative;
     z-index: 1;
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -176,12 +176,13 @@ body {
 /* Header */
 .header {
     width: 100%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem 2rem;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 2rem;
 }
 
@@ -205,7 +206,7 @@ body {
     opacity: 0.8;
     line-height: 1.5;
     font-weight: 300;
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -280,6 +281,8 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .breathing-circle-wrapper {
@@ -568,6 +571,9 @@ body {
     justify-content: center;
     gap: 2rem;
     padding: 1rem 2rem;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
 }
 
 .control-btn {
@@ -590,6 +596,23 @@ body {
         inset 0 2px 4px rgba(255, 255, 255, 0.3);
     position: relative;
     overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+/* Ensure icon containers are perfectly centered */
+.control-btn .play-icon,
+.control-btn .stop-icon,
+.control-btn .debug-icon,
+.control-btn .sound-on-icon,
+.control-btn .sound-off-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .control-btn::before {
@@ -623,6 +646,74 @@ body {
 
 .control-btn:active {
     transform: translateY(-1px) scale(1.05);
+}
+
+/* Icon styling for Lucide SVGs */
+.control-btn i[data-lucide] {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    color: currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* Ensure SVG elements are perfectly centered */
+.control-btn i[data-lucide] svg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Specific adjustments for different icons */
+.control-btn .play-icon i[data-lucide="play"] svg {
+    transform: translate(-45%, -50%); /* Play icon tends to look left-heavy */
+}
+
+.control-btn .stop-icon i[data-lucide="square"] svg,
+.control-btn .sound-on-icon i[data-lucide="volume-2"] svg,
+.control-btn .sound-off-icon i[data-lucide="volume-x"] svg {
+    transform: translate(-50%, -50%);
+}
+
+/* Responsive icon sizing */
+@media (max-width: 768px) {
+    .control-btn i[data-lucide] {
+        width: 20px;
+        height: 20px;
+    }
+    
+    /* Maintain specific positioning on smaller screens */
+    .control-btn .play-icon i[data-lucide="play"] svg {
+        transform: translate(-45%, -50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .control-btn i[data-lucide] {
+        width: 18px;
+        height: 18px;
+    }
+    
+    /* Maintain specific positioning on smallest screens */
+    .control-btn .play-icon i[data-lucide="play"] svg {
+        transform: translate(-45%, -50%);
+    }
+}
+
+/* Sound button specific styles */
+.sound-toggle .sound-on-icon,
+.sound-toggle .sound-off-icon {
+    transition: opacity 0.3s ease;
 }
 
 .progress-container {
@@ -691,10 +782,11 @@ body {
 
 /* Debug Timer */
 .debug-timer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    min-width: 250px;
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 800px;
     padding: 1rem;
     z-index: 1000;
     font-size: 0.9rem;
@@ -924,6 +1016,8 @@ body {
         flex-wrap: wrap;
         gap: 1rem;
         padding: 1rem;
+        width: 95%;
+        max-width: none;
     }
     
     .phase-indicator {
@@ -952,7 +1046,8 @@ body {
         top: auto;
         right: auto;
         margin-top: 1rem;
-        width: 100%;
+        width: 95%;
+        max-width: none;
     }
 }
 
@@ -966,6 +1061,18 @@ body {
     .header {
         margin-top: 5px;
         padding: 0.8rem;
+        width: 98%;
+        max-width: none;
+    }
+    
+    .debug-timer {
+        width: 98%;
+        max-width: none;
+    }
+    
+    .controls {
+        width: 98%;
+        max-width: none;
     }
     
     .header h1 {

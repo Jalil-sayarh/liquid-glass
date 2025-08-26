@@ -50,6 +50,7 @@ class BreathingExercise {
         // Get DOM elements
         this.playStopBtn = document.getElementById('playStop');
         this.debugToggle = document.getElementById('debugToggle');
+        this.soundToggle = document.getElementById('soundToggle');
         
         this.breathingCircle = document.querySelector('.breathing-circle');
         this.durationBlob = document.querySelector('.duration-blob');
@@ -73,6 +74,13 @@ class BreathingExercise {
         this.playIcon = document.querySelector('.play-icon');
         this.stopIcon = document.querySelector('.stop-icon');
         
+        this.soundOnIcon = document.querySelector('.sound-on-icon');
+        this.soundOffIcon = document.querySelector('.sound-off-icon');
+        this.ambientAudio = document.getElementById('ambientAudio');
+        
+        // Sound state
+        this.soundEnabled = false;
+        
         // Debug mode
         this.debugMode = false;
         this.timerUpdateId = null;
@@ -82,6 +90,7 @@ class BreathingExercise {
         // Bind events
         this.playStopBtn.addEventListener('click', () => this.toggleExercise());
         this.debugToggle.addEventListener('click', () => this.toggleDebugMode());
+        this.soundToggle.addEventListener('click', () => this.toggleSound());
         this.popupCloseBtn.addEventListener('click', () => this.hidePopup());
         
         // Close popup when clicking outside
@@ -97,6 +106,7 @@ class BreathingExercise {
 
         this.updateExerciseInfo();
         this.updateUI();
+        this.updateSoundUI();
     }
 
     // Main control methods
@@ -112,7 +122,7 @@ class BreathingExercise {
         console.log('Starting exercise:', this.currentExercise);
         this.isPlaying = true;
         this.playIcon.style.display = 'none';
-        this.stopIcon.style.display = 'block';
+        this.stopIcon.style.display = 'flex';
         
         if (this.currentPhase === 'ready' || this.currentPhase === 'complete') {
             this.resetToStart();
@@ -124,7 +134,7 @@ class BreathingExercise {
     stop() {
         console.log('Stopping exercise');
         this.isPlaying = false;
-        this.playIcon.style.display = 'block';
+        this.playIcon.style.display = 'flex';
         this.stopIcon.style.display = 'none';
         
         if (this.phaseTimer) {
@@ -479,6 +489,36 @@ class BreathingExercise {
             this.debugToggle.classList.remove('active');
             this.stopDebugTimer();
             console.log('Debug mode disabled');
+        }
+    }
+
+    toggleSound() {
+        this.soundEnabled = !this.soundEnabled;
+        
+        if (this.soundEnabled) {
+            this.ambientAudio.play().catch(e => {
+                console.log('Could not play audio:', e);
+                this.soundEnabled = false;
+                this.updateSoundUI();
+            });
+            this.soundToggle.classList.add('active');
+            console.log('Ambient sound enabled');
+        } else {
+            this.ambientAudio.pause();
+            this.soundToggle.classList.remove('active');
+            console.log('Ambient sound disabled');
+        }
+        
+        this.updateSoundUI();
+    }
+
+    updateSoundUI() {
+        if (this.soundEnabled) {
+            this.soundOnIcon.style.display = 'flex';
+            this.soundOffIcon.style.display = 'none';
+        } else {
+            this.soundOnIcon.style.display = 'none';
+            this.soundOffIcon.style.display = 'flex';
         }
     }
 

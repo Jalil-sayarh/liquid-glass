@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liquid Glass Breathing</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -83,29 +85,6 @@
                 </div>
             </div>
 
-            <!-- Controls -->
-            <div class="controls glass-panel">
-                                    <!-- Phase Indicator -->
-                                    <div class="phase-indicator">
-                                        <span class="phase-text">Get Ready</span>
-                                        <span class="phase-subtext">Prepare to begin</span>
-                                    </div>
-                <button class="control-btn play-stop" id="playStop">
-                    <span class="play-icon">▶</span>
-                    <span class="stop-icon" style="display: none;">⏹</span>
-                </button>
-                <button class="control-btn debug-toggle" id="debugToggle" title="Toggle Debug Timer">
-                    <span class="debug-icon">⏱️</span>
-                </button>
-                
-                <!-- Progress -->
-                <div class="progress-container">
-                    <div class="round-indicator">
-                        <span class="round-text">Round</span>
-                        <span class="round-number">1</span>
-                    </div>
-                </div>
-            </div>
 
             <!-- Debug Timer -->
             <div class="debug-timer glass-panel" id="debugTimer" style="display: none;">
@@ -125,6 +104,33 @@
                 </div>
                 <div class="timer-progress">
                     <div class="timer-progress-bar" id="timerProgressBar"></div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <div class="controls glass-panel">
+                                    <!-- Phase Indicator -->
+                                    <div class="phase-indicator">
+                                        <span class="phase-text">Get Ready</span>
+                                        <span class="phase-subtext">Prepare to begin</span>
+                                    </div>
+                <button class="control-btn play-stop" id="playStop">
+                    <span class="play-icon"><i data-lucide="play"></i></span>
+                    <span class="stop-icon" style="display: none;"><i data-lucide="square"></i></span>
+                </button>
+                <button class="control-btn debug-toggle" id="debugToggle" title="Toggle Debug Timer">
+                    <span class="debug-icon"><i data-lucide="timer"></i></span>
+                </button>
+                <button class="control-btn sound-toggle" id="soundToggle" title="Toggle Ambient Sound">
+                    <span class="sound-on-icon"><i data-lucide="volume-2"></i></span>
+                    <span class="sound-off-icon" style="display: none;"><i data-lucide="volume-x"></i></span>
+                </button>
+                
+                <!-- Progress -->
+                <div class="progress-container">
+                    <div class="round-indicator">
+                        <span class="round-text">Round</span>
+                        <span class="round-number">1</span>
+                    </div>
                 </div>
             </div>
 
@@ -157,6 +163,20 @@
         </div>
     </div>
 
+    <!-- Audio element for ambient sound -->
+    <audio id="ambientAudio" loop>
+        <source src="track.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script src="script.js"></script>
+    
+    <!-- Initialize Lucide Icons -->
+    <script>
+        // Initialize Lucide icons when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 </html>

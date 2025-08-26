@@ -127,8 +127,20 @@ body {
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     align-items: center;
+}
+
+/* Individual spacing instead of gap to avoid layout jumps */
+.main-interface > .header {
+    margin-bottom: 2rem;
+}
+
+.main-interface > .breathing-circle-wrapper {
+    margin-bottom: 2rem;
+}
+
+.main-interface > .controls {
+    margin-bottom: 0rem;
 }
 
 /* Liquid Glass Panel Base */
@@ -184,6 +196,7 @@ body {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 2rem;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header .exercise-selector {
@@ -282,7 +295,7 @@ body {
     align-items: center;
     gap: 3rem;
     margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3.5rem;
 }
 
 .breathing-circle-wrapper {
@@ -291,6 +304,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .breathing-circle {
@@ -574,6 +588,7 @@ body {
     width: 100%;
     max-width: 800px;
     box-sizing: border-box;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .control-btn {
@@ -780,15 +795,42 @@ body {
 
 
 
-/* Debug Timer */
+/* Debug Timer - Natural flow with smooth collapse/expand */
 .debug-timer {
-    position: relative;
-    top: auto;
-    right: auto;
     width: 100%;
     max-width: 800px;
-    padding: 1rem;
     z-index: 1000;
+    
+    /* Hidden state - collapsed but in flow */
+    opacity: 0;
+    max-height: 0;
+    padding: 0 1rem;
+    margin: 0;
+    overflow: hidden;
+    
+    /* Smooth transitions */
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                margin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.debug-timer.show {
+    opacity: 1;
+    max-height: 200px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.debug-timer.hide {
+    opacity: 0;
+    max-height: 0;
+    padding: 0 1rem;
+    margin: 0;
+}
+
+/* Timer styling */
+.debug-timer {
     font-size: 0.9rem;
     border: 2px solid var(--glass-border);
     background: linear-gradient(135deg, var(--glass-medium), var(--glass-light));
@@ -968,8 +1010,10 @@ body {
 @media (max-width: 768px) {
     .main-interface {
         width: 95%;
-        gap: 1.5rem;
+        /* Remove gap to prevent layout jumps */
     }
+    
+    /* No padding needed - timer is fixed positioned */
     
     .header {
         padding: 1rem;
@@ -1041,13 +1085,9 @@ body {
         font-size: 1.4rem;
     }
     
-    .debug-timer {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin-top: 1rem;
-        width: 95%;
-        max-width: none;
+    .debug-timer.show {
+        padding: 0.9rem;
+        max-height: 170px;
     }
 }
 
@@ -1055,8 +1095,10 @@ body {
 @media (max-width: 480px) {
     .main-interface {
         width: 98%;
-        gap: 1rem;
+        /* Remove gap to prevent layout jumps */
     }
+    
+    /* No padding needed - timer is fixed positioned */
     
     .header {
         margin-top: 5px;
@@ -1065,9 +1107,9 @@ body {
         max-width: none;
     }
     
-    .debug-timer {
-        width: 98%;
-        max-width: none;
+    .debug-timer.show {
+        padding: 0.8rem;
+        max-height: 150px;
     }
     
     .controls {

@@ -481,15 +481,39 @@ class BreathingExercise {
         this.debugMode = !this.debugMode;
         
         if (this.debugMode) {
-            this.debugTimer.style.display = 'block';
+            // Show timer with animation
+            this.showDebugTimer();
             this.debugToggle.classList.add('active');
             console.log('Debug mode enabled');
         } else {
-            this.debugTimer.style.display = 'none';
+            // Hide timer with animation
+            this.hideDebugTimer();
             this.debugToggle.classList.remove('active');
             this.stopDebugTimer();
             console.log('Debug mode disabled');
         }
+    }
+
+    showDebugTimer() {
+        // Remove hide class if present
+        this.debugTimer.classList.remove('hide');
+        
+        // Force a reflow to ensure previous state is applied
+        this.debugTimer.offsetHeight;
+        
+        // Trigger show animation
+        this.debugTimer.classList.add('show');
+    }
+
+    hideDebugTimer() {
+        // Remove show class and add hide class for animation
+        this.debugTimer.classList.remove('show');
+        this.debugTimer.classList.add('hide');
+        
+        // Clean up hide class after animation completes
+        setTimeout(() => {
+            this.debugTimer.classList.remove('hide');
+        }, 600);
     }
 
     toggleSound() {
@@ -565,21 +589,21 @@ class BreathingExercise {
     resetDebugTimer() {
         this.stopDebugTimer();
         
-        if (this.debugMode && this.debugTimer.style.display === 'block') {
-            console.log('Resetting debug timer display');
-            if (this.timerPhase) {
-                this.timerPhase.textContent = 'Ready';
-            }
-            if (this.totalTime) {
-                this.totalTime.textContent = '0.0s';
-            }
-            if (this.currentTime) {
-                this.currentTime.textContent = '0.0s';
-            }
-            if (this.timerProgressBar) {
-                this.timerProgressBar.style.width = '0%';
-            }
+        // Always reset the timer display elements to their initial state
+        if (this.timerPhase) {
+            this.timerPhase.textContent = 'Ready';
         }
+        if (this.totalTime) {
+            this.totalTime.textContent = '0.0s';
+        }
+        if (this.currentTime) {
+            this.currentTime.textContent = '0.0s';
+        }
+        if (this.timerProgressBar) {
+            this.timerProgressBar.style.width = '0%';
+        }
+        
+        console.log('Debug timer reset to initial state');
     }
 }
 

@@ -2,7 +2,7 @@ class BreathingExercise {
     constructor() {
         // Core state
         this.isPlaying = false;
-        this.currentExercise = 'wim-hof';
+        this.currentExercise = 'calm';
         this.currentPhase = 'ready';
         this.breathCount = 0;
         this.roundCount = 1;
@@ -16,14 +16,14 @@ class BreathingExercise {
                 rounds: 3,
                 steps: [
                     { type: 'breathing', count: 30, inhaleDuration: 2000, exhaleDuration: 1500 },
-                    { type: 'hold', duration: 60000 },
+                    { type: 'hold', duration: 30000 },
                     { type: 'recovery', duration: 17000 }
                 ]
             },
             'box': {
                 name: 'Box Breathing',
                 description: 'Inhale, hold, exhale, hold - each for 4 seconds. Complete 10 rounds.',
-                rounds: 10,
+                rounds: 20,
                 steps: [
                     { type: 'inhale', duration: 4000 },
                     { type: 'hold', duration: 4000 },
@@ -228,14 +228,14 @@ class BreathingExercise {
             }, 2000);
             
         } else if (this.currentPhase === 'hold') {
-            this.setPhase('hold', 'Hold', 'Hold your breath', 60000);
-            console.log('Starting 60-second hold phase');
+            this.setPhase('hold', 'Hold', 'Hold your breath', 30000);
+            console.log('Starting 30-second hold phase');
             
             this.phaseTimer = setTimeout(() => {
-                console.log('Hold phase complete after 60 seconds');
+                console.log('Hold phase complete after 30 seconds');
                 this.currentPhase = 'recovery';
                 this.runPhase();
-            }, 60000); // Full 60 seconds to match animations
+            }, 30000); // 30 seconds to match animations
             
         } else if (this.currentPhase === 'recovery') {
             this.setPhase('recovery', 'Recovery Breath', 'Deep breath and hold', 2000);
@@ -285,12 +285,24 @@ class BreathingExercise {
             this.roundCount++;
             this.breathCount = 0; // Reset for new round
             
-            this.setPhase('ready', 'Round Complete', `Starting Round ${this.roundCount}`, 3000);
-            
-            this.phaseTimer = setTimeout(() => {
-                this.currentPhase = 'inhale';
+            // Different rest periods based on exercise type
+            if (this.currentExercise === 'wim-hof') {
+                // Wim Hof needs 45-second rest between intense rounds
+                this.setPhase('ready', 'Round Complete', `45-second rest - Starting Round ${this.roundCount}`, 45000);
+                
+                this.phaseTimer = setTimeout(() => {
+                    this.currentPhase = 'inhale';
+                    this.runPhase();
+                }, 45000);
+                
+            } else {
+                // Box Breathing and 4-7-8 Calm continue immediately (seamless flow)
+                console.log(`Continuing to round ${this.roundCount} - seamless flow`);
+                
+                // No interruption - continue immediately with first step of new round
+                this.currentPhase = exercise.steps[0].type;
                 this.runPhase();
-            }, 3000);
+            }
             
         } else {
             this.setPhase('complete', 'Exercise Complete', 'Well done!', 0);

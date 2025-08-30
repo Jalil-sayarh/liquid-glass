@@ -30,23 +30,26 @@ body {
     background: linear-gradient(135deg, var(--light-blue) 0%, var(--medium-blue) 50%, var(--dark-blue) 100%);
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto;
     color: var(--white);
     position: relative;
+    scroll-behavior: smooth;
 }
 
 .app-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
+    padding: 20px 0;
 }
 
 /* Liquid Glass Background */
 .glass-background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -1008,12 +1011,16 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .main-interface {
-        width: 95%;
-        /* Remove gap to prevent layout jumps */
+    .app-container {
+        align-items: flex-start;
+        padding: 10px 0 30px 0;
     }
     
-    /* No padding needed - timer is fixed positioned */
+    .main-interface {
+        width: 95%;
+        gap: 1rem;
+        margin-top: 10px;
+    }
     
     .header {
         padding: 1rem;
@@ -1049,6 +1056,11 @@ body {
     .exercise-btn {
         padding: 0.6rem 1.2rem;
         font-size: 0.8rem;
+    }
+    
+    .breathing-container {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
     }
     
     .breathing-circle {
@@ -1093,12 +1105,16 @@ body {
 
 /* Extra small screens */
 @media (max-width: 480px) {
-    .main-interface {
-        width: 98%;
-        /* Remove gap to prevent layout jumps */
+    .app-container {
+        align-items: flex-start;
+        padding: 5px 0 40px 0;
     }
     
-    /* No padding needed - timer is fixed positioned */
+    .main-interface {
+        width: 98%;
+        gap: 0.8rem;
+        margin-top: 5px;
+    }
     
     .header {
         margin-top: 5px;
@@ -1129,6 +1145,11 @@ body {
         padding: 0.5rem 1rem;
         font-size: 0.75rem;
         border-radius: 12px;
+    }
+    
+    .breathing-container {
+        margin-top: 0.8rem;
+        margin-bottom: 1.5rem;
     }
     
     .breathing-circle {
